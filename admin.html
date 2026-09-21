@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>لوحة إدارة الحسن</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+font-family:Arial,Tahoma,sans-serif;
+background:#0b0b0b;
+color:#fff;
+padding:20px
+}
+.container{max-width:900px;margin:auto}
+.card{
+background:#151515;
+border:1px solid #333;
+border-radius:16px;
+padding:20px;
+margin-bottom:18px
+}
+h1,h2{margin-top:0}
+.gold{color:#d4af37}
+input,select,textarea{
+width:100%;
+padding:13px;
+margin:7px 0 12px;
+border-radius:9px;
+border:1px solid #444;
+background:#222;
+color:#fff;
+font-size:16px
+}
+button{
+border:0;
+border-radius:9px;
+padding:12px 18px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+background:#d4af37;
+color:#111;
+margin:4px
+}
+button.delete{background:#b3261e;color:#fff}
+button.secondary{background:#333;color:#fff}
+.shop{
+border:1px solid #333;
+border-radius:12px;
+padding:15px;
+margin:12px 0
+}
+.product{
+background:#202020;
+border-radius:10px;
+padding:10px;
+margin:8px 0
+}
+.hidden{display:none}
+</style>
+</head>
+<body>
+<div class="container">
+<div id="loginBox" class="card">
+<h1 class="gold">الحسن دليفري</h1>
+<h2>دخول لوحة الإدارة</h2>
+<input id="password" type="password" placeholder="كلمة مرور الإدارة">
+<button onclick="login()">دخول</button>
+<div id="loginMsg"></div>
+</div>
+<div id="adminBox" class="hidden"><div class="card">
+<h1 class="gold">لوحة إدارة الحسن</h1>
+<p>إدارة المحلات والمنتجات والأسعار.</p>
+<button class="secondary" onclick="logout()">تسجيل خروج</button>
+</div>
+
+<div class="card">
+<h2>إضافة محل جديد</h2>
+
+<input id="shopName" placeholder="اسم المحل">
+
+<select id="shopCategory">
+<option value="مطاعم">مطاعم</option>
+<option value="بقالة">بقالة</option>
+<option value="لحوم">لحوم</option>
+<option value="ملابس">ملابس</option>
+<option value="صيدلية">صيدلية</option>
+</select>
+
+<input id="shopIcon" placeholder="رمز المحل مثل 🛒 🍔 🥩">
+
+<textarea id="shopDescription" placeholder="وصف المحل"></textarea>
+
+<button onclick="addShop()">إضافة المحل</button>
+</div>
+
+<div class="card">
+<h2>المحلات الحالية</h2>
+<div id="shops"></div>
+</div>
+
+</div>
+</div>
+
+<script>
+let shops = JSON.parse(
+localStorage.getItem("alhassan_shops") || "[]"
+);
+
+const defaultShops = [
+{
+name:"سوبرماركت الحجي",
+category:"بقالة",
+icon:"🛒",
+description:"مواد غذائية ومستلزمات منزلية",
+products:[]
+},
+{
+name:"مطعم الحسن",
+category:"مطاعم",
+icon:"🍔",
+description:"وجبات ومأكولات",
+products:[]
+},
+{
+name:"ملحمة الحسن",
+category:"لحوم",
+icon:"🥩",
+description:"لحوم طازجة",
+products:[]
+}
+];
+
+if(!shops.length){
+shops = defaultShops;
+save();
+}
+
+function save(){
+localStorage.setItem(
+"alhassan_shops",
+JSON.stringify(shops)
+);
+}
+
+function login(){
+const password =
+document.getElementById("password").value;
+
+if(password==="123456"){
+document.getElementById("loginBox")
+.classList.add("hidden");
+
+document.getElementById("adminBox")
+.classList.remove("hidden");
+
+render();
+
+}else{
+
+document.getElementById("loginMsg").innerHTML =
+'<p style="color:#ff7777">كلمة المرور غير صحيحة</p>';
+
+}
+}
+
+function logout(){
+document.getElementById("adminBox")
+.classList.add("hidden");
+
+document.getElementById("loginBox")
+.classList.remove("hidden");
+
+document.getElementById("password").value="";
+}
+
+function addShop(){
+
+const name =
+document.getElementById("shopName")
+.value.trim();
+
+if(!name){
+alert("اكتب اسم المحل");
+return;
+}
+
+shops.push({
+name:name,
+category:function deleteShop(index){
+
+if(!confirm("متأكد بدك تحذف المحل؟")) return;
+
+shops.splice(index,1);
+save();
+render();
+}
+
+function addProduct(index){
+
+const name=prompt("اسم المنتج:");
+if(!name) return;
+
+const price=prompt("السعر:");
+if(!price) return;
+
+shops[index].products.push({
+name:name,
+price:price
+});
+
+save();
+render();
+}
+
+function deleteProduct(shopIndex,productIndex){
+
+shops[shopIndex].products.splice(productIndex,1);
+save();
+render();
+}
+
+function editShop(index){
+
+const name=prompt(
+"اسم المحل:",
+shops[index].name
+);
+
+if(name){
+shops[index].name=name;
+save();
+render();
+}
+}
+
+function render(){
+
+const box=document.getElementById("shops");
+
+if(!shops.length){
+box.innerHTML="<p>لا يوجد محلات.</p>";
+return;
+}
+
+box.innerHTML=shops.map((shop,i)=>`
+
+<div class="shop">
+
+<h2>${shop.icon} ${escapeHtml(shop.name)}</h2>
+
+<p class="gold">
+${escapeHtml(shop.category)}
+</p>
+
+<p>
+${escapeHtml(shop.description)}
+</p>
+
+<button onclick="editShop(${i})">
+تعديل الاسم
+</button>
+
+<button class="delete"
+onclick="deleteShop(${i})">
+حذف المحل
+</button>
+
+<button onclick="addProduct(${i})">
++ إضافة منتج
+</button>
+
+<div>
+
+${
+(shop.products||[]).map((product,p)=>`
+
+<div class="product">
+
+<strong>
+${escapeHtml(product.name)}
+</strong>
+
+<br>
+
+<span class="gold">
+${escapeHtml(product.price)} ل.س
+</span>
+
+<br>
+
+<button class="delete"
+onclick="deleteProduct(${i},${p})">
+حذف المنتج
+</button>
+
+</div>
+
+`).join("")
+}
+
+</div>
+
+</div>
+
+`).join("");
+}
+
+function escapeHtml(text){
+
+return String(text)
+.replaceAll("&","&amp;")
+.replaceAll("<","&lt;")
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+}
+
+</script>
+
+</body>
+</html>
+document.getElementById
