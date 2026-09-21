@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>الحسن دليفري | خدمة التوصيل</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Tahoma,sans-serif;background:#080808;color:#fff}
+header{background:#050505;border-bottom:1px solid #c9a227;padding:16px;text-align:center;position:sticky;top:0;z-index:10}
+.logo{font-size:30px;font-weight:900;color:#d4af37}
+.sub{color:#ddd;font-size:13px;margin-top:5px}
+.hero{padding:45px 20px;text-align:center;background:linear-gradient(145deg,#111,#050505)}
+.hero h1{font-size:34px;margin:0 0 12px;color:#d4af37}
+.hero p{font-size:18px;color:#eee;line-height:1.7}
+.btn{display:inline-block;border:0;border-radius:12px;padding:14px 22px;font-size:16px;font-weight:800;cursor:pointer;text-decoration:none;margin:5px}
+.gold{background:#d4af37;color:#080808}
+.dark{background:#171717;color:#fff;border:1px solid #555}
+.container{max-width:1100px;margin:auto;padding:25px 16px}
+.section-title{font-size:25px;color:#d4af37;margin:10px 0 20px}
+.search{width:100%;padding:15px;border-radius:12px;border:1px solid #444;background:#111;color:white;font-size:16px;margin-bottom:20px}
+.categories{display:flex;gap:8px;overflow:auto;margin-bottom:25px}
+.cat{white-space:nowrap;padding:10px 16px;background:#151515;border:1px solid #333;border-radius:20px;cursor:pointer}
+.cat.active{background:#d4af37;color:#000}
+.shops{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.shop{background:#111;border:1px solid #292929;border-radius:18px;overflow:hidden;cursor:pointer}
+.shop-img{height:160px;background:linear-gradient(135deg,#222,#0c0c0c);display:flex;align-items:center;justify-content:center;color:#d4af37;font-size:48px}
+.shop-body{padding:16px}
+.shop h3{margin:0 0 8px;color:#fff}
+.shop p{color:#aaa;margin:5px 0}
+.tag{display:inline-block;background:#222;color:#d4af37;padding:6px 9px;border-radius:8px;font-size:12px}
+.empty{text-align:center;padding:35px;color:#999}
+footer{text-align:center;border-top:1px solid #222;padding:25px;color:#888;margin-top:35px}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:50;padding:20px;overflow:auto}
+.modal-box{max-width:650px;margin:30px auto;background:#111;border:1px solid #d4af37;border-radius:18px;padding:22px}
+.close{float:left;font-size:28px;color:#aaa;cursor:pointer}
+.products{display:grid;gap:12px;margin-top:20px}
+.product{display:flex;justify-content:space-between;align-items:center;background:#181818;padding:14px;border-radius:12px}
+.product button{background:#d4af37;border:0;border-radius:9px;padding:9px 13px;font-weight:bold}
+input,textarea,select{width:100%;padding:13px;margin:7px 0;background:#080808;border:1px solid #444;border-radius:10px;color:white;font-size:15px}
+label{display:block;margin-top:12px;color:#ddd}
+.order-summary{background:#181818;padding:14px;border-radius:12px;margin:12px 0}
+@media(max-width:600px){
+.hero h1{font-size:28px}
+.hero p{font-size:16px}
+.product{gap:10px}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+<div class="logo">الحسن دليفري</div>
+<div class="sub">سريع • آمن • موثوق</div>
+</header>
+
+<section class="hero">
+<h1>الحسن بيوصلك 🔥</h1>
+<p>اطلب من المحلات والمطاعم، وخلي التوصيل علينا.</p>
+<a class="btn gold" href="tel:0992536508">📞 اطلب الآن</a>
+<a class="btn dark" href="https://wa.me/963992536508">💬 واتساب</a>
+</section>
+
+<main class="container">
+
+<h2 class="section-title">المحلات والخدمات</h2>
+
+<input id="search" class="search" placeholder="🔎 ابحث عن محل أو منتج...">
+
+<div class="categories">
+<div class="cat active" data-cat="الكل">الكل</div>
+<div class="cat" data-cat="مطاعم">🍔 مطاعم</div>
+<div class="cat" data-cat="بقالة">🛒 بقالة</div>
+<div class="cat" data-cat="لحوم">🥩 لحوم</div>
+<div class="cat" data-cat="ملابس">👕 ملابس</div>
+<div class="cat" data-cat="صيدلية">💊 صيدلية</div>
+</div>
+
+<div id="shops" class="shops"></div>
+
+<section style="margin-top:40px;background:#111;border:1px solid #292929;border-radius:18px;padding:25px;text-align:center">
+<h2 class="section-title">عندك محل؟</h2>
+<p style="color:#bbb">خلّي زباينك يطلبوا منك ويوصلهم الحسن.</p>
+<button class="btn gold" onclick="openModal('registerModal')">سجّل محلك معنا</button>
+</section>
+
+</main>
+
+<footer>
+الحسن دليفري © 2026<br>
+عتمان • القرى المحيطة • درعا
+</footer>
+
+<!-- SHOP MODAL -->
+<div id="shopModal" class="modal">
+<div class="modal-box">
+<span class="close" onclick="closeModal('shopModal')">×</span>
+<h2 id="shopTitle" class="section-title"></h2>
+<p id="shopDesc" style="color:#aaa"></p>
+<div id="products" class="products"></div>
+</div>
+</div>
+
+<!-- ORDER MODAL -->
+<div id="orderModal" class="modal">
+<div class="modal-box">
+<span class="close" onclick="closeModal('orderModal')">×</span>
+<h2 class="section-title">تأكيد الطلب</h2>
+
+<div id="orderSummary" class="order-summary"></div>
+
+<label>اسمك</label>
+<input id="customerName" placeholder="اكتب اسمك">
+
+<label>رقم الهاتف</label>
+<input id="customerPhone" placeholder="09xxxxxxxx">
+
+<label>العنوان</label>
+<textarea id="customerAddress" rows="3" placeholder="اكتب موقعك بالتفصيل"></textarea>
+
+<button class="btn gold" style="width:100%;margin-top:15px" onclick="sendOrder()">إرسال الطلب</button>
+</div>
+</div>
+
+<!-- REGISTER -->
+<div id="registerModal" class="modal">
+<div class="modal-box">
+<span class="close" onclick="closeModal('registerModal')">×</span>
+<h2 class="section-title">سجّل محلك معنا</h2>
+
+<label>اسم المحل</label>
+<input id="shopName" placeholder="اسم المحل">
+
+<label>نوع المحل</label>
+<select id="shopCategory">
+<option>مطاعم</option>
+<option>بقالة</option>
+<option>لحوم</option>
+<option>ملابس</option>
+<option>صيدلية</option>
+<option>أخرى</option>
+</select>
+
+<label>رقم الهاتف</label>
+<input id="shopPhone" placeholder="رقم المحل">
+
+<label>موقع المحل</label>
+<input id="shopLocation" placeholder="المنطقة / الشارع">
+
+<button class="btn gold" style="width:100%;margin-top:15px" onclick="registerShop()">إرسال طلب التسجيل</button>
+</div>
+</div>
+
+<script>
+const PHONE="963992536508";
+
+const shops=[
+{
+name:"سوبرماركت الحجي",
+category:"بقالة",
+desc:"مواد غذائية وسوبرماركت",
+icon:"🛒",
+products:[
+["مواد غذائية","حسب الطلب"],
+["مشروبات","حسب الطلب"],
+["سكاكر وشيبس","حسب الطلب"],
+["منظفات","حسب الطلب"]
+]
+},
+{
+name:"مطعم الحسن",
+category:"مطاعم",
+desc:"وجبات ومأكولات",
+icon:"🍔",
+products:[
+["وجبة شاورما","حسب الطلب"],
+["برغر","حسب الطلب"],
+["بطاطا","حسب الطلب"],
+["مشروبات","حسب الطلب"]
+]
+},
+{
+name:"ملحمة الحسن",
+category:"لحوم",
+desc:"لحوم عجل وطلبات يومية",
+icon:"🥩",
+products:[
+["لحم عجل","حسب الطلب"],
+["لحمة مفرومة","حسب الطلب"],
+["شرحات","حسب الطلب"],
+["طلب حسب الوزن","حسب الطلب"]
+]
+}
+];
+
+let currentCategory="الكل";
+let currentProduct="";
+let currentShop="";
+
+function renderShops(){
+const q=document.getElementById("search").value.trim().toLowerCase();
+const box=document.getElementById("shops");
+
+const list=shops.filter(s=>{
+const cat=currentCategory==="الكل"||s.category===currentCategory;
+const text=(s.name+" "+s.desc+" "+s.category).toLowerCase();
+return cat&&text.includes(q);
+});
+
+if(!list.length){
+box.innerHTML='<div class="empty">ما لقينا نتيجة مطابقة.</div>';
+return;
+}
+
+box.innerHTML=list.map((s,i)=>`
+<div class="shop" onclick="openShop(${i})">
+<div class="shop-img">${s.icon}</div>
+<div class="shop-body">
+<h3>${s.name}</h3>
+<p>${s.desc}</p>
+<span class="tag">${s.category}</span>
+</div>
+</div>`).join("");
+}
+
+function openShop(i){
+const s=shops[i];
+currentShop=s.name;
+document.getElementById("shopTitle").textContent=s.name;
+document.getElementById("shopDesc").textContent=s.desc;
+
+document.getElementById("products").innerHTML=s.products.map((p,index)=>`
+<div class="product">
+<div>
+<strong>${p[0]}</strong><br>
+<small style="color:#999">${p[1]}</small>
+</div>
+<button onclick="chooseProduct('${p[0].replace(/'/g,"\\'")}')">اطلب</button>
+</div>`).join("");
+
+openModal("shopModal");
+}
+
+function chooseProduct(product){
+currentProduct=product;
+document.getElementById("orderSummary").innerHTML=
+`المحل: <b>${currentShop}</b><br>الطلب: <b>${product}</b>`;
+closeModal("shopModal");
+openModal("orderModal");
+}
+
+function sendOrder(){
+const name=document.getElementById("customerName").value.trim();
+const phone=document.getElementById("customerPhone").value.trim();
+const address=document.getElementById("customerAddress").value.trim();
+
+if(!name||!phone||!address){
+alert("يرجى تعبئة الاسم ورقم الهاتف والعنوان.");
+return;
+}
+
+const text=
+`طلب جديد من الحسن دليفري%0A%0A`+
+`المحل: ${currentShop}%0A`+
+`الطلب: ${currentProduct}%0A%0A`+
+`الاسم: ${name}%0A`+
+`الهاتف: ${phone}%0A`+
+`العنوان: ${address}`;
+
+window.open(`https://wa.me/${PHONE}?text=${text}`,"_blank");
+}
+
+function registerShop(){
+const name=document.getElementById("shopName").value.trim();
+const cat=document.getElementById("shopCategory").value;
+const phone=document.getElementById("shopPhone").value.trim();
+const location=document.getElementById("shopLocation").value.trim();
+
+if(!name||!phone||!location){
+alert("يرجى تعبئة المعلومات المطلوبة.");
+return;
+}
+
+const text=
+`طلب تسجيل محل مع الحسن دليفري%0A%0A`+
+`اسم المحل: ${name}%0A`+
+`التصنيف: ${cat}%0A`+
+`الهاتف: ${phone}%0A`+
+`الموقع: ${location}`;
+
+window.open(`https://wa.me/${PHONE}?text=${text}`,"_blank");
+}
+
+function openModal(id){
+document.getElementById(id).style.display="block";
+}
+
+function closeModal(id){
+document.getElementById(id).style.display="none";
+}
+
+document.querySelectorAll(".cat").forEach(el=>{
+el.addEventListener("click",()=>{
+document.querySelectorAll(".cat").forEach(x=>x.classList.remove("active"));
+el.classList.add("active");
+currentCategory=el.dataset.cat;
+renderShops();
+});
+});
+
+document.getElementById("search").addEventListener("input",renderShops);
+
+window.addEventListener("click",e=>{
+document.querySelectorAll(".modal").forEach(m=>{
+if(e.target===m)m.style.display="none";
+});
+});
+
+renderShops();
+</script>
+
+</body>
+</html>
