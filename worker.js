@@ -3,17 +3,24 @@ export default {
     const url = new URL(request.url);
 
     if (url.pathname === "/api/shops") {
-      const data = await env.ALHASSAN_DATA.get("shops");
-      return new Response(data || "[]", {
-        headers: { "Content-Type": "application/json" }
-      });
+      if (request.method === "GET") {
+        return new Response(
+          await env.ALHASSAN_DATA.get("shops") || "[]",
+          {headers:{"Content-Type":"application/json"}}
+        );
+      }
+
+      if (request.method === "POST") {
+        const data = await request.text();
+        await env.ALHASSAN_DATA.put("shops", data);
+        return new Response("OK");
+      }
     }
 
-    if (url.pathname === "/admin") {
+    if (url.pathname === "/admin")
       return env.ASSETS.fetch(
         new Request(new URL("/admin.html", request.url), request)
       );
-    }
 
     return env.ASSETS.fetch(request);
   }
