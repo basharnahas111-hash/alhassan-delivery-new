@@ -95,7 +95,9 @@ background:#d4af37;
 color:#000;
 border-color:#d4af37;
 }
-.shops{.shop{
+.shops{
+padding:0 20px 30px;
+}.shop{
 background:#151515;
 border:1px solid #2d2d2d;
 border-radius:16px;
@@ -129,7 +131,10 @@ color:#aaa;
 margin:10px 20px 30px;
 padding:25px 20px;
 text-align:center;
-background:#151515;.register h2{
+background:#151515;
+border:1px solid #333;
+border-radius:18px;
+}.register h2{
 margin:0 0 10px;
 color:#d4af37;
 }
@@ -155,7 +160,13 @@ font-size:13px;
 border-top:1px solid #222;
 }
 .modal{
-display:none;.modal-box{
+display:none;
+position:fixed;
+z-index:1000;
+inset:0;
+background:rgba(0,0,0,.8);
+padding:20px;
+}.modal-box{
 max-width:500px;
 margin:60px auto;
 padding:22px;
@@ -207,18 +218,7 @@ font-weight:bold;
 }
 </style>
 </head>
-<body>
-position:fixed;
-z-index:1000;
-inset:0;
-background:rgba(0,0,0,.8);
-padding:20px;
-}
-border:1px solid #333;
-border-radius:18px;
-}
-padding:0 20px 30px;
-}<header>
+<body><header>
 <div class="logo">الحسن دليفري</div>
 <div class="slogan">سريع • آمن • موثوق</div>
 </header>
@@ -273,8 +273,7 @@ padding:0 20px 30px;
 <textarea id="customerNote" class="form-input" rows="4" placeholder="ملاحظات الطلب"></textarea>
 <button class="form-btn" onclick="sendOrder()">📲 إرسال الطلب عبر واتساب</button>
 </div>
-</div>
-<section class="shop<div class="modal" id="registerModal">
+</div><div class="modal" id="registerModal">
 <div class="modal-box">
 <button class="close" onclick="closeModal('registerModal')">✕</button>
 <h2>سجّل محلك معنا</h2>
@@ -319,7 +318,7 @@ div.innerHTML=`<div class="shop-top"><div class="shop-icon">${shop.icon}</div><d
 div.addEventListener("click",()=>openShop(shop));
 container.appendChild(div);
 });
-}s" id="shops"></section>function openShop(shop){
+}function openShop(shop){
 currentShop=shop;
 document.getElementById("shopTitle").textContent=shop.name;
 const products=document.getElementById("products");
@@ -421,3 +420,4 @@ renderShops();
 </script>
 </body>
 </html>
+<section class="shops" id="shops"></section>
