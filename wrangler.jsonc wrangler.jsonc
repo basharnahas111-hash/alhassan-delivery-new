@@ -3,13 +3,20 @@
   "name": "alhassan-delivery-new",
   "main": "worker.js",
   "compatibility_date": "2026-09-21",
+
   "kv_namespaces": [
     {
       "binding": "ALHASSAN_DATA",
       "id": "e743f54bcedf4cd189cdc6146981d5ba"
     }
   ],
+
   "assets": {
-    "directory": "."
+    "directory": ".",
+    "binding": "ASSETS",
+    "run_worker_first": [
+      "/api/*",
+      "/admin"
+    ]
   }
 }
