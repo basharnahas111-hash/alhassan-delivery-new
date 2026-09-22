@@ -10,9 +10,12 @@ header{padding:25px;background:#111}
 h1{color:#d4af37}
 .box{margin:20px;padding:25px;background:#151515;border-radius:18px}
 a,button{display:block;margin:12px;padding:15px;border:0;border-radius:12px;background:#d4af37;color:#000;text-decoration:none;font-weight:bold}
+.shop{border:1px solid #444;border-radius:12px;padding:15px;margin:12px 0}
 </style>
 </head>
+
 <body>
+
 <header>
 <h1>الحسن دليفري</h1>
 <p>سريع • آمن • موثوق</p>
@@ -31,6 +34,33 @@ a,button{display:block;margin:12px;padding:15px;border:0;border-radius:12px;back
 <a href="https://wa.me/963992536508?text=أرغب%20بتسجيل%20محلي%20مع%20الحسن%20دليفري">🏪 سجّل محلك معنا</a>
 </div>
 
-<footer>الحسن دليفري © 2026<br>عتمان • القرى المحيطة • درعا</footer>
+<div class="box">
+<h2>محلاتنا 🏪</h2>
+<div id="shops">جاري تحميل المحلات...</div>
+</div>
+
+<script>
+fetch("/api/shops")
+.then(r=>r.json())
+.then(s=>{
+document.getElementById("shops").innerHTML=s.length
+?s.map(x=>`
+<div class="shop">
+<h3>${x.n}</h3>
+<p>${x.c}</p>
+</div>
+`).join("")
+:"لا يوجد محلات حالياً";
+})
+.catch(()=>{
+document.getElementById("shops").innerHTML="تعذر تحميل المحلات";
+});
+</script>
+
+<footer>
+الحسن دليفري © 2026<br>
+عتمان • القرى المحيطة • درعا
+</footer>
+
 </body>
 </html>
