@@ -95,9 +95,7 @@ background:#d4af37;
 color:#000;
 border-color:#d4af37;
 }
-.shops{
-padding:0 20px 30px;
-}.shop{
+.shops{.shop{
 background:#151515;
 border:1px solid #2d2d2d;
 border-radius:16px;
@@ -131,9 +129,7 @@ color:#aaa;
 margin:10px 20px 30px;
 padding:25px 20px;
 text-align:center;
-background:#151515;
-border:1px solid #333;
-border-radius:18px;.register h2{
+background:#151515;.register h2{
 margin:0 0 10px;
 color:#d4af37;
 }
@@ -159,12 +155,7 @@ font-size:13px;
 border-top:1px solid #222;
 }
 .modal{
-display:none;
-position:fixed;
-z-index:1000;
-inset:0;
-background:rgba(0,0,0,.8);
-padding:20px;.modal-box{
+display:none;.modal-box{
 max-width:500px;
 margin:60px auto;
 padding:22px;
@@ -214,7 +205,20 @@ background:#d4af37;
 color:#000;
 font-weight:bold;
 }
-</style><header>
+</style>
+</head>
+<body>
+position:fixed;
+z-index:1000;
+inset:0;
+background:rgba(0,0,0,.8);
+padding:20px;
+}
+border:1px solid #333;
+border-radius:18px;
+}
+padding:0 20px 30px;
+}<header>
 <div class="logo">الحسن دليفري</div>
 <div class="slogan">سريع • آمن • موثوق</div>
 </header>
@@ -269,7 +273,53 @@ font-weight:bold;
 <textarea id="customerNote" class="form-input" rows="4" placeholder="ملاحظات الطلب"></textarea>
 <button class="form-btn" onclick="sendOrder()">📲 إرسال الطلب عبر واتساب</button>
 </div>
-</div>function openShop(shop){
+</div>
+<section class="shop<div class="modal" id="registerModal">
+<div class="modal-box">
+<button class="close" onclick="closeModal('registerModal')">✕</button>
+<h2>سجّل محلك معنا</h2>
+<input id="shopName" class="form-input" placeholder="اسم المحل">
+<input id="shopOwner" class="form-input" placeholder="اسم صاحب المحل">
+<input id="shopPhone" class="form-input" placeholder="رقم الهاتف">
+<input id="shopArea" class="form-input" placeholder="المنطقة">
+<input id="shopType" class="form-input" placeholder="نوع المحل">
+<button class="form-btn" onclick="registerShop()">إرسال طلب التسجيل</button>
+</div>
+</div>
+
+<script>
+const PHONE="963992536508";
+
+const shops=[
+{name:"سوبرماركت الحجي",category:"بقالة",icon:"🛒",products:["مواد غذائية","مشروبات","سكاكر وشيبس","منظفات"]},
+{name:"مطعم الحسن",category:"مطاعم",icon:"🍔",products:["وجبة شاورما","برغر","بطاطا","مشروبات"]},
+{name:"ملحمة الحسن",category:"لحوم",icon:"🥩",products:["لحم عجل","لحمة مفرومة","شرحات","طلب حسب الوزن"]}
+];
+
+let currentShop=null;
+let currentProduct=null;
+let currentCategory="الكل";
+
+function renderShops(){
+const container=document.getElementById("shops");
+const search=document.getElementById("search").value.trim().toLowerCase();
+container.innerHTML="";
+
+shops.filter(shop=>{
+const categoryMatch=currentCategory==="الكل"||shop.category===currentCategory;
+const searchMatch=!search||
+shop.name.toLowerCase().includes(search)||
+shop.category.toLowerCase().includes(search)||
+shop.products.some(product=>product.toLowerCase().includes(search));
+return categoryMatch&&searchMatch;
+}).forEach(shop=>{
+const div=document.createElement("div");
+div.className="shop";
+div.innerHTML=`<div class="shop-top"><div class="shop-icon">${shop.icon}</div><div><h3>${shop.name}</h3><small>${shop.category} • اطلب الآن</small></div></div>`;
+div.addEventListener("click",()=>openShop(shop));
+container.appendChild(div);
+});
+}s" id="shops"></section>function openShop(shop){
 currentShop=shop;
 document.getElementById("shopTitle").textContent=shop.name;
 const products=document.getElementById("products");
@@ -371,8 +421,3 @@ renderShops();
 </script>
 </body>
 </html>
-<section class="shops" id="shops"></section>
-</head>
-<body>
-}
-}
