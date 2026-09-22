@@ -6,509 +6,597 @@
 <title>الحسن دليفري</title>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
-margin:0;
-font-family:Arial,Tahoma,sans-serif;
-background:#0b0b0b;
-color:#fff;
+  margin:0;
+  font-family:Arial,Tahoma,sans-serif;
+  background:#0b0b0b;
+  color:#fff;
 }
 
 header{
-padding:22px 18px;
-text-align:center;
-background:#111;
-border-bottom:1px solid #2b2b2b;
+  padding:20px;
+  text-align:center;
+  background:#111;
+  border-bottom:1px solid #333;
 }
 
 .logo{
-font-size:30px;
-font-weight:900;
-color:#d4af37;
+  font-size:30px;
+  font-weight:900;
+  color:#d4af37;
 }
 
 .slogan{
-margin-top:6px;
-color:#ddd;
-font-size:14px;
+  margin-top:6px;
+  color:#ccc;
+  font-size:14px;
 }
 
 .hero{
-padding:45px 20px;
-text-align:center;
-background:linear-gradient(145deg,#151515,#080808);
+  padding:45px 20px;
+  text-align:center;
+  background:linear-gradient(145deg,#191919,#080808);
 }
 
 .hero h1{
-margin:0;
-font-size:38px;
-color:#d4af37;
+  margin:0;
+  font-size:38px;
+  color:#d4af37;
 }
 
 .hero p{
-color:#ccc;
-font-size:17px;
-margin:14px 0 25px;
+  color:#ccc;
+  font-size:17px;
+  margin:14px 0 25px;
 }
 
 .buttons{
-display:flex;
-gap:10px;
-justify-content:center;
-flex-wrap:wrap;
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
 }
 
 .btn{
-border:0;
-border-radius:12px;
-padding:14px 22px;
-font-size:16px;
-font-weight:bold;
-cursor:pointer;
-text-decoration:none;
+  border:0;
+  border-radius:12px;
+  padding:14px 22px;
+  font-size:16px;
+  font-weight:bold;
+  text-decoration:none;
 }
 
 .call{
-background:#d4af37;
-color:#000;
+  background:#d4af37;
+  color:#000;
 }
 
 .whatsapp{
-background:#fff;
-color:#111;
-}
-
-.search{
-padding:20px;
+  background:#fff;
+  color:#111;
+}.search{
+  padding:20px;
 }
 
 .search input{
-width:100%;
-padding:15px;
-border-radius:12px;
-border:1px solid #333;
-background:#151515;
-color:#fff;
-font-size:16px;
+  width:100%;
+  padding:15px;
+  border-radius:12px;
+  border:1px solid #333;
+  background:#151515;
+  color:#fff;
+  font-size:16px;
 }
 
 .categories{
-display:flex;
-gap:8px;
-overflow-x:auto;
-padding:0 20px 20px;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:0 20px 20px;
 }
 
 .cat{
-white-space:nowrap;
-background:#181818;
-border:1px solid #333;
-color:#fff;
-padding:10px 15px;
-border-radius:20px;
-cursor:pointer;
+  white-space:nowrap;
+  background:#181818;
+  border:1px solid #333;
+  color:#fff;
+  padding:10px 15px;
+  border-radius:20px;
+  cursor:pointer;
 }
 
 .cat.active{
-background:#d4af37;
-color:#000;
-border-color:#d4af37;
+  background:#d4af37;
+  color:#000;
+  border-color:#d4af37;
 }
 
 .shops{
-padding:0 20px 30px;.form-input{
-width:100%;
-padding:13px;
-margin:7px 0;
-background:#0e0e0e;
-border:1px solid #333;
-color:#fff;
-border-radius:10px;
+  padding:0 20px 30px;
+}
+
+.shop{
+  background:#151515;
+  border:1px solid #2d2d2d;
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:12px;
+  cursor:pointer;
+  transition:0.2s;
+}
+
+.shop:active{
+  transform:scale(0.98);
+}
+
+.shop-top{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.shop-icon{
+  width:55px;
+  height:55px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#222;
+  border-radius:14px;
+  font-size:28px;
+}
+
+.shop h3{
+  margin:0 0 6px;
+  font-size:18px;
+}
+
+.shop small{
+  color:#aaa;.register{
+  margin:10px 20px 30px;
+  padding:25px 20px;
+  text-align:center;
+  background:#151515;
+  border:1px solid #333;
+  border-radius:18px;
+}
+
+.register h2{
+  margin:0 0 10px;
+  color:#d4af37;
+}
+
+.register p{
+  color:#bbb;
+  line-height:1.7;
+}
+
+.register button{
+  width:100%;
+  padding:14px;
+  border:0;
+  border-radius:12px;
+  background:#d4af37;
+  color:#000;
+  font-size:16px;
+  font-weight:bold;
+}
+
+footer{
+  text-align:center;
+  padding:25px 20px;
+  color:#777;
+  font-size:13px;
+  border-top:1px solid #222;
+}
+
+.modal{
+  display:none;
+  position:fixed;
+  z-index:1000;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  padding:20px;
+}
+
+.modal-box{
+  max-width:500px;
+  margin:60px auto;
+  padding:22px;
+  background:#151515;
+  border:1px solid #333;
+  border-radius:18px;
+  position:relative;
+}
+
+.close{
+  position:absolute;
+  left:15px;
+  top:12px;
+  border:0;
+  background:none;
+  color:#fff;
+  font-size:22px;
+}
+
+.modal-box h2{
+  color:#d4af37;
+  margin-top:5px;
+}
+
+.product{
+  padding:15px;
+  margin:8px 0;
+  background:#222;
+  border:1px solid #333;
+  border-radius:12px;
+  cursor:pointer;
+}
+
+.form-input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  background:#0e0e0e;
+  border:1px solid #333;
+  color:#fff;
+  border-radius:10px;
+  font-size:15px;
 }
 
 .form-btn{
-width:100%;
-margin-top:10px;
-padding:14px;
-border:0;
-border-radius:10px;
-background:#d4af37;
-color:#000;
-font-weight:bold;
-cursor:pointer;
+  width:100%;
+  margin-top:10px;
+  padding:14px;
+  border:0;
+  border-radius:10px;
+  background:#d4af37;
+  color:#000;
+  font-weight:bold;
 }
-
 </style>
-</head>
-
-<body>
+</head><body>
 
 <header>
-<div class="logo">الحسن دليفري</div>
-<div class="slogan">سريع • آمن • موثوق</div>
+  <div class="logo">الحسن دليفري</div>
+  <div class="slogan">سريع • آمن • موثوق</div>
 </header>
 
 <section class="hero">
-<h1>الحسن بيوصلك 🔥</h1>
-<p>اطلب من المحلات والمطاعم، وخلي التوصيل علينا.</p>
+  <h1>الحسن بيوصلك 🔥</h1>
+  <p>من المحل لباب بيتك... التوصيل علينا.</p>
 
-<div class="buttons">
-<a class="btn call" href="tel:0992536508">📞 اطلب الآن</a>
+  <div class="buttons">
+    <a class="btn call" href="tel:0992536508">📞 اطلب الآن</a>
 
-<a class="btn whatsapp"
-href="https://wa.me/963992536508"
-target="_blank">💬 واتساب</a>
-</div>
+    <a class="btn whatsapp"
+       href="https://wa.me/963992536508"
+       target="_blank">
+      💬 واتساب
+    </a>
+  </div>
 </section>
 
 <div class="search">
-<input id="search"
-type="text"
-placeholder="🔎 ابحث عن محل أو منتج...">
+  <input
+    id="search"
+    type="text"
+    placeholder="🔎 ابحث عن محل أو منتج..."
+  >
 </div>
 
 <div class="categories">
 
-<button class="cat active"
-data-cat="الكل">الكل</button>
+  <button class="cat active" data-cat="الكل">
+    الكل
+  </button>
 
-<button class="cat"
-data-cat="مطاعم">مطاعم</button>
+  <button class="cat" data-cat="مطاعم">
+    مطاعم
+  </button>
 
-<button class="cat"
-data-cat="بقالة">بقالة</button>
+  <button class="cat" data-cat="بقالة">
+    بقالة
+  </button>
 
-<button class="cat"
-data-cat="لحوم">لحوم</button>
+  <button class="cat" data-cat="لحوم">
+    لحوم
+  </button>
 
-<button class="cat"
-data-cat="ملابس">ملابس</button>
+  <button class="cat" data-cat="ملابس">
+    ملابس
+  </button>
 
-<button class="cat"
-data-cat="صيدلية">صيدلية</button>
+  <button class="cat" data-cat="صيدلية">
+    صيدلية
+  </button>
 
 </div>
 
-<section class="shops"
-id="shops"></section>
+<section class="shops" id="shops"></section>
 
 <section class="register">
 
-<h2>عندك محل؟</h2>
+  <h2>عندك محل؟</h2>
 
-<p>
-خلّي زباينك يطلبوا منك عن طريق الحسن دليفري.
-</p>
+  <p>
+    خلّي زباينك يطلبوا منك عن طريق الحسن دليفري.
+  </p>
 
-<button onclick="openRegister()">
-سجّل محلك معنا
-</button>
+  <button onclick="openRegister()">
+    سجّل محلك معنا
+  </button>
 
 </section>
 
 <footer>
-الحسن دليفري © 2026<br>
-عتمان • القرى المحيطة • درعا
-</footer>
+  الحسن دليفري © 2026<br>
+  عتمان • القرى المحيطة • درعا<div class="modal" id="shopModal">
+  <div class="modal-box">
 
-<div class="modal"
-id="shopModal">
+    <button class="close" onclick="closeModal('shopModal')">✕</button>
 
-<div class="modal-box">
+    <h2 id="shopTitle"></h2>
 
-<button class="close"
-onclick="closeModal('shopModal')">
-✕
-</button>
+    <div id="products"></div>
 
-<h2 id="shopTitle"></h2>
-
-<div id="products"></div>
-
-</div>
+  </div>
 </div>
 
-<div class="modal"
-id="orderModal">
+<div class="modal" id="orderModal">
+  <div class="modal-box">
 
-<div class="modal-box">
+    <button class="close" onclick="closeModal('orderModal')">✕</button>
 
-<button class="close"
-onclick="closeModal('orderModal')">
-✕
-</button>
+    <h2>تأكيد الطلب</h2>
 
-<h2>تأكيد الطلب</h2>
+    <p id="selectedProduct"></p>
 
-<p id="selectedProduct"></p>
+    <input
+      id="customerName"
+      class="form-input"
+      placeholder="اسمك"
+    >
 
-<input
-id="customerName"
-class="form-input"
-placeholder="اسمك">
+    <input
+      id="customerAddress"
+      class="form-input"
+      placeholder="العنوان / المنطقة"
+    >
 
-<input
-id="customerAddress"
-class="form-input"
-placeholder="العنوان / المنطقة">
+    <textarea
+      id="customerNote"
+      class="form-input"
+      rows="4"
+      placeholder="ملاحظات الطلب"
+    ></textarea>
 
-<textarea
-id="customerNote"
-class="form-input"
-rows="4"
-placeholder="ملاحظات الطلب"></textarea>
+    <button class="form-btn" onclick="sendOrder()">
+      📲 إرسال الطلب عبر واتساب
+    </button>
 
-<button
-class="form-btn"
-onclick="sendOrder()">
-
-📲 إرسال الطلب عبر واتساب
-
-</button>
-
-</div>
+  </div>
 </div>
 
-<div class="modal"
-id="registerModal">
+<div class="modal" id="registerModal">
+  <div class="modal-box">
 
-<div class="modal-box">
+    <button class="close" onclick="closeModal('registerModal')">✕</button>
 
-<button class="close"
-onclick="closeModal('registerModal')">
-✕
-</button>
+    <h2>سجّل محلك معنا</h2>
 
-<h2>سجّل محلك معنا</h2>
+    <input
+      id="shopName"
+      class="form-input"
+      placeholder="اسم المحل"
+    >
 
-<input
-id="shopName"
-class="form-input"
-placeholder="اسم المحل">
+    <input
+      id="shopOwner"
+      class="form-input"
+      placeholder="اسم صاحب المحل"
+    >
 
-<input
-id="shopOwner"
-class="form-input"
-placeholder="اسم صاحب المحل">
+    <input
+      id="shopPhone"
+      class="form-input"
+      placeholder="رقم الهاتف"
+    >
 
-<input
-id="shopPhone"
-class="form-input"
-placeholder="رقم الهاتف">
+    <input
+      id="shopArea"
+      class="form-input"
+      placeholder="المنطقة"
+    >
 
-<input
-id="shopArea"
-class="form-input"
-placeholder="المنطقة">
+    <input
+      id="shopType"
+      class="form-input"
+      placeholder="نوع المحل"
+    >
 
-<input
-id="shopType"
-class="form-input"
-placeholder="نوع المحل">
+    <button class="form-btn" onclick="registerShop()">
+      إرسال طلب التسجيل
+    </button>
 
-<button
-class="form-btn"
-onclick="registerShop()">
+  </div><script>
 
-إرسال طلب التسجيل
+const PHONE = "963992536508";
 
-</button>
+const shops = [
+  {
+    name:"سوبرماركت الحجي",
+    category:"بقالة",
+    icon:"🛒",
+    products:[
+      "مواد غذائية",
+      "مشروبات",
+      "سكاكر وشيبس",
+      "منظفات"
+    ]
+  },
 
-</div>
-</div>
+  {
+    name:"مطعم الحسن",
+    category:"مطاعم",
+    icon:"🍔",
+    products:[
+      "وجبة شاورما",
+      "برغر",
+      "بطاطا",
+      "مشروبات"
+    ]
+  },
 
-<script>
-
-const PHONE="963992536508";
-
-const shops=[
-
-{
-name:"سوبرماركت الحجي",
-category:"بقالة",
-icon:"🛒",
-products:[
-"مواد غذائية",
-"مشروبات",
-"سكاكر وشيبس",
-"منظفات"
-]
-},
-
-{
-name:"مطعم الحسن",
-category:"مطاعم",
-icon:"🍔",
-products:[
-"وجبة شاورما",
-"برغر",
-"بطاطا",
-"مشروبات"
-]
-},
-
-{
-name:"ملحمة الحسن",
-category:"لحوم",
-icon:"🥩",
-products:[
-"لحم عجل",
-"لحمة مفرومة",
-"شرحات",
-"طلب حسب الوزن"
-]
-}
-
+  {
+    name:"ملحمة الحسن",
+    category:"لحوم",
+    icon:"🥩",
+    products:[
+      "لحم عجل",
+      "لحمة مفرومة",
+      "شرحات",
+      "طلب حسب الوزن"
+    ]
+  }
 ];
 
-let currentShop=null;
-
-let currentProduct=null;
-
-let currentCategory="الكل";
+let currentShop = null;
+let currentProduct = null;
+let currentCategory = "الكل";
 
 function renderShops(){
 
-const container=
-document.getElementById("shops");
+  const container = document.getElementById("shops");
 
-const search=
-document.getElementById("search")
-.value
-.trim()
-.toLowerCase();
+  const search = document
+    .getElementById("search")
+    .value
+    .trim()
+    .toLowerCase();
 
-container.innerHTML="";
+  container.innerHTML = "";
 
-shops
-.filter(shop=>{
+  shops
+    .filter(shop => {
 
-const categoryMatch=
-currentCategory==="الكل" ||
-shop.category===currentCategory;
+      const categoryMatch =
+        currentCategory === "الكل" ||
+        shop.category === currentCategory;
 
-const searchMatch=
-!search ||
-shop.name.toLowerCase().includes(search) ||
-shop.category.toLowerCase().includes(search) ||
-shop.products.some(p=>
-p.toLowerCase().includes(search)
-);
+      const searchMatch =
+        !search ||
+        shop.name.toLowerCase().includes(search) ||
+        shop.category.toLowerCase().includes(search) ||
+        shop.products.some(product =>
+          product.toLowerCase().includes(search)
+        );
 
-return categoryMatch && searchMatch;
+      return categoryMatch && searchMatch;
 
-})
-.forEach(shop=>{
+    })
+    .forEach(shop => {
 
-const div=
-document.createElement("div");
+      const div = document.createElement("div");
 
-div.className="shop";
+      div.className = "shop";
 
-div.innerHTML=`
+      div.innerHTML = `
+        <div class="shop-top">
 
-<div class="shop-top">
+          <div class="shop-icon">
+            ${shop.icon}
+          </div>
 
-<div class="shop-icon">
-${shop.icon}
-</div>
+          <div>
+            <h3>${shop.name}</h3>
+            <small>${shop.category} • اطلب الآن</small>
+          </div>
 
-<div>
+        </div>
+      `;
 
-<h3>
-${shop.name}
-</h3>
+      div.addEventListener(
+        "click",
+        () => openShop(shop)
+      );
 
-<small>
-${shop.category} • اطلب الآن
-</small>
+      container.appendChild(div);
 
-</div>
-
-</div>
-
-`;
-
-div.addEventListener(
-"click",
-()=>openShop(shop)
-);
-
-container.appendChild(div);
-
-});
-
-}function openShop(shop){
-
-currentShop=shop;
-
-document.getElementById("shopTitle").textContent=
-shop.name;
-
-const products=
-document.getElementById("products");
-
-products.innerHTML="";
-
-shop.products.forEach(product=>{
-
-const div=document.createElement("div");
-
-div.className="product";
-
-div.textContent="🛒 "+product;
-
-div.addEventListener(
-"click",
-()=>chooseProduct(product)
-);
-
-products.appendChild(div);
-
-});
-
-document.getElementById("shopModal")
-.style.display="block";
+    });
 }
 
+function openShop(shop){
+
+  currentShop = shop;
+
+  document.getElementById("shopTitle")
+    .textContent = shop.name;
+
+  const products =
+    document.getElementById("products");
+
+  products.innerHTML = "";
+
+  shop.products.forEach(product => {
+
+    const div = document.createElement("div");
+
+    div.className = "product";
+
+    div.textContent = "🛒 " + product;
+
+    div.addEventListener(
+      "click",
+      () => chooseProduct(product)
+    );
+
+    products.appendChild(div);
+
+  });
+
+  document.getElementById("shopModal")
+    .style.display = "block";
+}
 
 function chooseProduct(product){
 
-currentProduct=product;
+  currentProduct = product;
 
-document.getElementById("selectedProduct")
-.textContent="المنتج: "+product;
+  document.getElementById("selectedProduct")
+    .textContent = "المنتج: " + product;
 
-closeModal("shopModal");
+  closeModal("shopModal");
 
-document.getElementById("orderModal")
-.style.display="block";
+  document.getElementById("orderModal")
+    .style.display = "block";
 }
-
 
 function sendOrder(){
 
-const name=
-document.getElementById("customerName")
-.value.trim();
+  const name =
+    document.getElementById("customerName")
+      .value.trim();
 
-const address=
-document.getElementById("customerAddress")
-.value.trim();
+  const address =
+    document.getElementById("customerAddress")
+      .value.trim();
 
-const note=
-document.getElementById("customerNote")
-.value.trim();
+  const note =
+    document.getElementById("customerNote")
+      .value.trim();
 
-if(!name || !address){
+  if(!name || !address){
 
-alert("اكتب اسمك والعنوان أولاً.");
+    alert("اكتب اسمك والعنوان أولاً.");
+    return;
+  }
 
-return;
-}
-
-const message=
+  const message =
 `طلب جديد من الحسن دليفري 🔥
 
 المحل: ${currentShop.name}
@@ -520,53 +608,50 @@ const message=
 
 أرسل الطلب عبر الحسن دليفري.`;
 
-window.open(
-"https://wa.me/"+
-PHONE+
-"?text="+
-encodeURIComponent(message),
-"_blank"
-);
+  window.open(
+    "https://wa.me/" +
+    PHONE +
+    "?text=" +
+    encodeURIComponent(message),
+    "_blank"
+  );
 }
-
 
 function openRegister(){
 
-document.getElementById("registerModal")
-.style.display="block";
+  document.getElementById("registerModal")
+    .style.display = "block";
 }
-
 
 function registerShop(){
 
-const name=
-document.getElementById("shopName")
-.value.trim();
+  const name =
+    document.getElementById("shopName")
+      .value.trim();
 
-const owner=
-document.getElementById("shopOwner")
-.value.trim();
+  const owner =
+    document.getElementById("shopOwner")
+      .value.trim();
 
-const phone=
-document.getElementById("shopPhone")
-.value.trim();
+  const phone =
+    document.getElementById("shopPhone")
+      .value.trim();
 
-const area=
-document.getElementById("shopArea")
-.value.trim();
+  const area =
+    document.getElementById("shopArea")
+      .value.trim();
 
-const type=
-document.getElementById("shopType")
-.value.trim();
+  const type =
+    document.getElementById("shopType")
+      .value.trim();
 
-if(!name || !owner || !phone || !area){
+  if(!name || !owner || !phone || !area){
 
-alert("عبّي المعلومات الأساسية أولاً.");
+    alert("عبّي المعلومات الأساسية أولاً.");
+    return;
+  }
 
-return;
-}
-
-const message=
+  const message =
 `طلب تسجيل محل مع الحسن دليفري 🏪
 
 اسم المحل: ${name}
@@ -577,65 +662,60 @@ const message=
 
 أرغب بتسجيل محلي ضمن الحسن دليفري.`;
 
-window.open(
-"https://wa.me/"+
-PHONE+
-"?text="+
-encodeURIComponent(message),
-"_blank"
-);
+  window.open(
+    "https://wa.me/" +
+    PHONE +
+    "?text=" +
+    encodeURIComponent(message),
+    "_blank"
+  );
 }
-
 
 function closeModal(id){
 
-document.getElementById(id)
-.style.display="none";
+  document.getElementById(id)
+    .style.display = "none";
 }
 
+document
+  .querySelectorAll(".cat")
+  .forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      document
+        .querySelectorAll(".cat")
+        .forEach(b =>
+          b.classList.remove("active")
+        );
+
+      button.classList.add("active");
+
+      currentCategory =
+        button.dataset.cat;
+
+      renderShops();
+
+    });
+
+  });
 
 document
-.querySelectorAll(".cat")
-.forEach(button=>{
+  .getElementById("search")
+  .addEventListener(
+    "input",
+    renderShops
+  );
 
-button.addEventListener("click",()=>{
+window.addEventListener("click", event => {
 
-document
-.querySelectorAll(".cat")
-.forEach(b=>
-b.classList.remove("active")
-);
+  if(event.target.classList.contains("modal")){
 
-button.classList.add("active");
+    event.target.style.display = "none";
 
-currentCategory=
-button.dataset.cat;
-
-renderShops();
+  }
 
 });
-
-});
-
-
-document
-.getElementById("search")
-.addEventListener(
-"input",
-renderShops
-);
-
-
-window.addEventListener("click",event=>{
-
-if(event.target.classList.contains("modal")){
-
-event.target.style.display="none";
-
-}
-
-});
-
 
 renderShops();
 
@@ -643,3 +723,6 @@ renderShops();
 
 </body>
 </html>
+</div>
+</footer>
+}
