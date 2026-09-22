@@ -1,16 +1,28 @@
-<!doctype html><html lang="ar" dir="rtl"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>إدارة الحسن</title>
+<!doctype html><html lang="ar" dir="rtl"><meta charset="utf-8">
+<title>إدارة الحسن</title>
 <style>
-body{font-family:Arial;background:#111;color:#fff;padding:15px}input,select,button{padding:10px;margin:5px;border-radius:8px}button{background:#d4af37;border:0;font-weight:bold}.x{background:#c22;color:#fff}.shop{border:1px solid #444;padding:12px;margin:12px 0}.p img{width:90px;height:70px;object-fit:cover}
+body{font-family:Arial;background:#111;color:#fff;padding:15px}
+input,select,button{padding:10px;margin:5px;border-radius:8px}
+button{background:#d4af37;border:0;font-weight:bold}
+.x{background:#c22;color:#fff}.s{border:1px solid #444;padding:12px;margin:12px 0}
 </style>
-<h1>الحسن دليفري</h1><div id="login"><input id="pw" type="password" placeholder="كلمة المرور"><button onclick="go()">دخول</button></div>
-<div id="app" style="display:none"><h2>إضافة محل</h2><input id="sn" placeholder="اسم المحل"><select id="sc"><option>مطاعم</option><option>بقالة</option><option>لحوم</option><option>ملابس</option><option>صيدلية</option></select><button onclick="add()">إضافة</button><h2>المحلات</h2><div id="list"></div></div>
+<h1>الحسن دليفري - الإدارة</h1>
+<div id="login"><input id="pw" type="password" placeholder="كلمة المرور"><button onclick="go()">دخول</button></div>
+<div id="app" hidden>
+<h2>إضافة محل</h2>
+<input id="sn" placeholder="اسم المحل">
+<select id="sc"><option>مطاعم</option><option>بقالة</option><option>لحوم</option><option>ملابس</option><option>صيدلية</option></select>
+<button onclick="add()">إضافة</button>
+<h2>المحلات</h2><div id="list"></div>
+</div>
 <script>
-let s=JSON.parse(localStorage.a||"[]");
-const save=()=>localStorage.a=JSON.stringify(s);
-function go(){if(pw.value=="123456"){login.style.display="none";app.style.display="block";show()}}
-function add(){if(!sn.value)return;s.push({n:sn.value,c:sc.value,p:[]});save();show();sn.value=""}
-function del(i){s.splice(i,1);save();show()}
-function prod(i){let n=prompt("اسم المنتج"),v=prompt("السعر");if(!n||!v)return;let f=document.createElement("input");f.type="file";f.accept="image/*";f.onchange=()=>{let r=new FileReader();r.onload=()=>{s[i].p.push({n:n,v:v,img:r.result});save();show()};r.readAsDataURL(f.files[0])};f.click()}
-function dp(i,j){s[i].p.splice(j,1);save();show()}
-function show(){list.innerHTML=s.map((x,i)=>`<div class=shop><h2>${x.n}</h2><b>${x.c}</b><br><button class=x onclick="del(${i})">حذف المحل</button><button onclick="prod(${i})">+ منتج</button>${x.p.map((q,j)=>`<div class=p>${q.img?`<img src="${q.img}">`:""}<br>${q.n} - ${q.v} ل.س <button class=x onclick="dp(${i},${j})">حذف</button></div>`).join("")}</div>`).join("")}
+let s=[];
+async function load(){s=await(await fetch("/api/shops")).json();show()}
+async function save(){await fetch("/api/shops",{method:"POST",body:JSON.stringify(s)});show()}
+function go(){if(pw.value=="alhassan@2026"){login.hidden=true;app.hidden=false;load()}}
+function add(){if(!sn.value)return;s.push({n:sn.value,c:sc.value,p:[]});save();sn.value=""}
+function del(i){s.splice(i,1);save()}
+function prod(i){let n=prompt("اسم المنتج"),v=prompt("السعر");if(n&&v){s[i].p.push({n,v});save()}}
+function dp(i,j){s[i].p.splice(j,1);save()}
+function show(){list.innerHTML=s.map((x,i)=>`<div class=s><h2>${x.n}</h2>${x.c}<br><button class=x onclick="del(${i})">حذف</button><button onclick="prod(${i})">+ منتج</button>${x.p.map((p,j)=>`<p>${p.n} - ${p.v} ل.س <button class=x onclick="dp(${i},${j})">حذف</button></p>`).join("")}</div>`).join("")}
 </script>
