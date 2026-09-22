@@ -1,8 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "alhassan-delivery-new",
+  "name": "alhassan-delivery-api",
   "main": "worker.js",
-  "compatibility_date": "2026-09-21",
+  "compatibility_date": "2026-09-22",
 
   "kv_namespaces": [
     {
